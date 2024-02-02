@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+body {
+  background-color: #00b36b;
+}
+.canvas {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  width: 100wh;
+}
+.canvas .row {
+  margin: auto;
+}
+.timers {
+  width: 500px;
+  margin: auto;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  font-size: 2.7rem;
+  align-items: center;
+}
+a {
+  cursor: pointer;
+  margin: auto;
+}
+i {
+  padding: 15px;
+}
+i:hover {
+  background-color: black;
+  color: white;
+}
+
+#clock {
+  text-align: center;
+  margin: auto;
+  margin-top: 50px;
+  padding: 30px 0;
+  border: 5px solid red;
+  border-radius: 85px;
+  width: 100%;
+  max-width: 400px;
+}
+#clock #timer-label {
+  font-size: 1.5rem;
+}
+#clock #time-left {
+  font-size: 3rem;
+}
+#start_stop, #reset {
+  margin: 0 25px;
+}
+#clock a{
+  cursor: pointer;
+  font-size: 3.5rem;
+}
+footer {
+  margin-top: 20px;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  font-family: monospace;
+}
