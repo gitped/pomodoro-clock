@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import ThemeSwitcher from './components/ThemeSwitcher';
 import TimerSet from './components/TimerSet';
 import ClockCountdown from './components/ClockCountdown';
 import Footer from './components/Footer';
-
-const { useState, useEffect } = React
 
 const ClockApp = () => {
   const [sessionTime, setSessionTime] = useState(25);
@@ -14,7 +13,7 @@ const ClockApp = () => {
   const [seconds, setSeconds] = useState(0);
   const [breakMode, setBreakMode] = useState(false);
   const audioElement = document.getElementById('beep');
-  
+  const [currentTheme, setCurrentTheme] = useState('light');
 
   useEffect(() => {
     if (!pause) {
@@ -39,7 +38,8 @@ const ClockApp = () => {
     }
   }, [pause, minutes, seconds, breakMode]);
 
-  
+  const handleThemeChange = (theme) => { setCurrentTheme(theme) };
+
   const handleReset = () => {
     setPause(true);
     setSessionTime(25);
@@ -59,38 +59,44 @@ const ClockApp = () => {
     setSessionTime((prevSessionTime) => (prevSessionTime > 1 ? prevSessionTime - 1 : prevSessionTime));
     if(!breakMode) setMinutes((prevMinutes) => (prevMinutes > 1 ? prevMinutes - 1 : prevMinutes));
   };
+
   const increaseSessionTime = () => {
     setSessionTime((prevSessionTime) => (prevSessionTime<=59 ? prevSessionTime+1 : prevSessionTime));
     if(!breakMode) setMinutes((prevMinutes) => (prevMinutes > 1 ? prevMinutes + 1 : prevMinutes));
   };
+
   const decreaseBreakTime = () => {
     setBreakTime((prevBreakTime) => (prevBreakTime>1 ? prevBreakTime-1 : prevBreakTime));
     if(breakMode) setMinutes((prevMinutes) => (prevMinutes > 1 ? prevMinutes - 1 : prevMinutes));
   };
+
   const increaseBreakTime = () => {
     setBreakTime((prevBreakTime) => (prevBreakTime<=59 ? prevBreakTime+1 : prevBreakTime));
     if(breakMode) setMinutes((prevMinutes) => (prevMinutes > 1 ? prevMinutes + 1 : prevMinutes));
   };
 
   return (
-    <div className="canvas">
-      <div className="row">
-        <div className="col-12">
-          <TimerSet title="Pomodoro" label="session" 
-            decrease={decreaseSessionTime} time={sessionTime} increase={increaseSessionTime} />
-          <hr />
-          <TimerSet title="Break" label="break" 
-            decrease={decreaseBreakTime} time={breakTime} increase={increaseBreakTime} />
+    <div className={`${currentTheme}`}>
+      <div className="canvas">
+        <ThemeSwitcher onThemeChange={handleThemeChange} currentTheme={currentTheme} />
+        <div className="row">
+          <div className="col-12">
+            <TimerSet title="Pomodoro" label="session" 
+              decrease={decreaseSessionTime} time={sessionTime} increase={increaseSessionTime} />
+            <hr />
+            <TimerSet title="Break" label="break" 
+              decrease={decreaseBreakTime} time={breakTime} increase={increaseBreakTime} />
+          </div>
+          <div className="col-12">
+            <ClockCountdown label={breakMode ? "Break Session" : "Pomodoro Session"}
+              time={`${minutes<10 ? `0${minutes}` : minutes}:${seconds<10 ? `0${seconds}` : seconds}`} 
+              pause={pause}
+              togglePause={togglePause} 
+              handleReset={handleReset} />
+          </div>
         </div>
-        <div className="col-12">
-          <ClockCountdown label={breakMode ? "Break Session" : "Pomodoro Session"}
-            time={`${minutes<10 ? `0${minutes}` : minutes}:${seconds<10 ? `0${seconds}` : seconds}`} 
-            pause={pause}
-            togglePause={togglePause} 
-            handleReset={handleReset} />
-        </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   );
 };

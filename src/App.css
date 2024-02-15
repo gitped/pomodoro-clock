@@ -1,73 +1,264 @@
+@import 'https://fonts.googleapis.com/css?family=Press+Start+2P';
+
+:root {
+  --theme-square-border-color: #fff;
+  --main-theme-light: #cbc6ba;
+  --main-theme-dark: #343a40;
+  --main-theme-green: #6ab04c;
+  --main-theme-blue: #007bff;
+  --main-theme-red: #ff5858;
+}
+
+/* LIGHT THEME */
+.light {
+  --background-color: #cbc6ba;
+  --text-color: #070605;
+  --hr-background-color: linear-gradient(to right, #495057, #cbc6ba, #495057);
+  --hr-shadow-color: rgba(0, 0, 0, 0.3);
+  --timer-background-color: #b6afaf;
+  --timer-shadow: rgba(0, 0, 0, 0.8);
+  --timer-hover-shadow: rgb(0, 0, 0, 0.5);
+  --timer-button-hover-background-color: #cbc6ba;
+  --clock-background-color: #cec6ba;
+  --clock-shadow: #333;
+  --clock-font-color: #000;
+  --clock-button-hover-color: #000;
+  --footer-color: #070605;
+}
+
+/* DARK THEME */
+.dark {
+  --background-color: #343a40;
+  --text-color: #f8f9fa;
+  --hr-background-color: linear-gradient(to right, #495057, #343a40, #495057);
+  --hr-shadow-color: rgba(255, 255, 255, 0.3);
+  --timer-background-color: #495057;
+  --timer-shadow: rgba(255, 255, 255, 0.2);
+  --timer-hover-shadow: rgb(255, 255, 255, 0.5);
+  --timer-button-hover-background-color: #343a40;
+  --clock-background-color: #373a40;
+  --clock-shadow: #495057;
+  --clock-font-color: #f8f9fa;
+  --clock-button-hover-color: #f8f9fa;
+  --footer-color: #f8f9fa;
+}
+
+/* GREEN THEME */
+.green {
+  --background-color: #6ab04c;
+  --text-color: #fff;
+  --hr-background-color: linear-gradient(to right, #287d3c, #6ab04c, #287d3c);
+  --hr-shadow-color: rgba(0, 0, 0, 0.3);
+  --timer-background-color: #287d3c;
+  --timer-shadow: rgba(0, 0, 0, 0.5);
+  --timer-hover-shadow: rgb(255, 255, 255, 0.5);
+  --timer-button-hover-background-color: #6ab04c;
+  --clock-background-color: #9ab04c;
+  --clock-shadow: #333;
+  --clock-font-color: #000;
+  --clock-button-hover-color: green;
+  --footer-color: #fff;
+}
+
+/* BLUE THEME */
+.blue {
+  --background-color: #007bff;
+  --text-color: #fff;
+  --hr-background-color: linear-gradient(to right, #0056b3, #007bff, #0056b3);
+  --hr-shadow-color: rgba(0, 0, 0, 0.3);
+  --timer-background-color: #0056b3;
+  --timer-shadow: rgba(0, 0, 0, 0.5);
+  --timer-hover-shadow: rgb(255, 255, 255, 0.5);
+  --timer-button-hover-background-color: #007bff;
+  --clock-background-color: #307bff;
+  --clock-shadow: #333;
+  --clock-font-color: #000;
+  --clock-button-hover-color: blue;
+  --footer-color: #fff;
+}
+
+/* RED THEME */
+.red {
+  --background-color: #ff5858;
+  --text-color: #fff;
+  --hr-background-color: linear-gradient(to right, #c82333, #ff5858, #c82333);
+  --hr-shadow-color: rgba(0, 0, 0, 0.3);
+  --timer-background-color: #c82333;
+  --timer-shadow: rgba(0, 0, 0, 1);
+  --timer-hover-shadow: rgb(255, 255, 255, 0.5);
+  --timer-button-hover-background-color: #c82333;
+  --clock-background-color: #f82333;
+  --clock-shadow: #333;
+  --clock-font-color: #000;
+  --clock-button-hover-color: red;
+  --footer-color: #fff;
+}
+
+hr {
+  border: none;
+  height: 3px;
+  background: var(--hr-background-color);
+  margin: 20px 0;
+  box-shadow: 0 5px 15px var(--hr-shadow-color);
+}
+
+a, .themeSquare {
+  cursor: pointer;
+}
+
+
+/* MAIN CANVAS */
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Press Start 2P', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-color);
+  transition: background-color 0.3s;
 }
-body {
-  background-color: #00b36b;
-}
+
 .canvas {
+  background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   text-align: center;
   height: 100vh;
-  width: 100wh;
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
 }
 .canvas .row {
   margin: auto;
 }
-.timers {
-  width: 500px;
-  margin: auto;
-  margin-bottom: 10px;
-  font-size: 1.8rem;
-}
-.buttons {
+
+
+/* THEME SQUARES */
+.theme-switcher {
   display: flex;
-  flex-direction: row;
-  font-size: 2.7rem;
-  align-items: center;
-}
-a {
-  cursor: pointer;
-  margin: auto;
-}
-i {
-  padding: 15px;
-}
-i:hover {
-  background-color: black;
-  color: white;
+  justify-content: space-around;
 }
 
-#clock {
-  text-align: center;
+.themeSquare {
+  width: 35px;
+  height: 35px;
+  border: 2px solid var(--theme-square-border-color);
+  border-radius: 20%;
+  transition: transform 0.4s;
+}
+
+.themeSquare.light {
+  background-color: var(--main-theme-light);
+}
+.themeSquare.dark {
+  background-color: var(--main-theme-dark);
+}
+.themeSquare.green {
+  background-color: var(--main-theme-green);
+}
+.themeSquare.blue {
+  background-color: var(--main-theme-blue);
+}
+.themeSquare.red {
+  background-color: var(--main-theme-red);
+}
+
+.themeSquare.active {
+  transform: scale(1.3);
+}
+
+
+/* TIMERS */
+.timers {
+  width: 650px;
   margin: auto;
-  margin-top: 50px;
-  padding: 30px 0;
-  border: 5px solid red;
-  border-radius: 85px;
-  width: 100%;
-  max-width: 400px;
-}
-#clock #timer-label {
-  font-size: 1.5rem;
-}
-#clock #time-left {
+  padding: 16px 0;
   font-size: 3rem;
+  box-shadow: 2px 2px 5px var(--timer-shadow);
+  transition: box-shadow 0.4s ease;
+  background-color: var(--timer-background-color);
+  border-radius: 3%;
 }
-#start_stop, #reset {
+.timers p {
+  margin: 0;
+}
+
+.timers:hover {
+  box-shadow: 2px 2px 5px var(--timer-hover-shadow);
+  transition: box-shadow 0.4s ease;
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+.timers .buttons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  font-size: 2.8rem;
+  align-items: center;
+}
+
+.timers i {
+  padding: 15px;
+  border-radius: 50%;
+}
+
+.timers a {
+  position: relative;
+}
+
+.timers a:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-color: var(--timer-button-hover-background-color);
+  border-radius: 50%;
+  filter: blur(25px);
+}
+
+
+/* CLOCK COUNTDOWN */
+#clock {
+  background-color: var(--clock-background-color);
+  text-align: center;
+  margin: 70px auto auto auto;
+  padding: 60px 45px 30px 45px;
+  border-radius: 50%;
+  box-shadow: 0 0 20px var(--clock-shadow);
+  width: 100%;
+  max-width: 550px;
+  font-size: 3rem;
+  color: var(--clock-font-color);
+}
+
+#clock #timer-label {
+  font-size: 2rem;
+  margin: 20px 0;
+}
+
+#clock .clock-buttons {
+  display: inline-block;
   margin: 0 25px;
 }
-#clock a{
-  cursor: pointer;
-  font-size: 3.5rem;
+
+#clock .clock-buttons i:hover {
+  transform: scale(1.5) rotate(360deg);
+  transition: transform 0.6s ease;
+  color: var(--clock-button-hover-color);
 }
+
+#clock a {
+  font-size: 3.2rem;
+}
+
+
+/* FOOTER */
 footer {
-  margin-top: 20px;
-  color: white;
+  padding-bottom: 5px;
+  color: var(--footer-color);
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  font-family: monospace;
+  font-family: 'Courier New', Courier, monospace;
 }
