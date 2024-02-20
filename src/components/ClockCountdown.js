@@ -6,12 +6,12 @@ const ClockCountdown = ({ label, time, togglePause, pause, handleReset }) => {
       <div id="timer-label">{label}</div>
       <div id="time-left">{time}</div>
       <div className="clock-buttons">
-        <a id="start_stop" onClick={togglePause}>
+        <a id="start_stop" onClick={togglePause} data-testid="start-stop">
           {pause ? <i className="fa-solid fa-play"></i> : <i className="fa-solid fa-pause"></i>}
         </a>
       </div>
       <div className="clock-buttons">
-        <a id="reset" onClick={handleReset}>
+        <a id="reset" onClick={handleReset} data-testid="reset">
           <i className="fa-solid fa-rotate"></i>
         </a>
       </div>
